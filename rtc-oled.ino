@@ -34,7 +34,7 @@ void setup()
     if (rtc.lostPower())
     {
         Serial.println("RTC lost power, let's set the time!");
-        rtc.adjust(DateTime(2023, 6, 2, 12, 4, 0));
+        rtc.adjust(DateTime(2023, 6, 2, 12, 9, 0));
     }
 
     // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
