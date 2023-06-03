@@ -115,3 +115,4 @@ void loop()
 
     delay(1000); // Change delay to 1000 milliseconds
 }
+// Add a accurate temp/hummidity/air-pressure/air-quality senser ASAP!
