@@ -116,3 +116,5 @@ void loop()
     delay(1000); // Change delay to 1000 milliseconds
 }
 // Add a accurate temp/hummidity/air-pressure/air-quality senser ASAP!
+
+// Check OLED in a few days- maybe switch to a long lasting LCD to reduce display degradation
