@@ -30,11 +30,11 @@ void setup()
         while (1)
             delay(10);
     }
-    rtc.adjust(DateTime(2023, 6, 2, 11, 45, 0));
+
     if (rtc.lostPower())
     {
         Serial.println("RTC lost power, let's set the time!");
-        rtc.adjust(DateTime(2023, 6, 2, 11, 44, 0));
+        rtc.adjust(DateTime(2023, 6, 2, 12, 4, 0));
     }
 
     // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -115,6 +115,3 @@ void loop()
 
     delay(1000); // Change delay to 1000 milliseconds
 }
-// Add a accurate temp/hummidity/air-pressure/air-quality senser ASAP!
-
-// Check OLED in a few days- maybe switch to a long lasting LCD to reduce display degradation
