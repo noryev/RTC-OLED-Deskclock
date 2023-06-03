@@ -37,3 +37,5 @@ With the clock functioning as expected, the RTC module was set to the correct ti
 ## Summary
 
 This project involved creating a desk clock with an Arduino Uno, DS3231 RTC, and SSD1306 OLED display. The clock displays the current date, time, and temperature and includes a progress bar that visually represents the progress of each minute.
+
+Remember setting the time is a bitch, first set the time of the board on the device by adding this string into the code on top of the lost power adjustment. So when doing this again, remember, first add this string:  rtc.adjust(DateTime(2023, 6, 3, 1, 14, 0)); below the lost power adjustment field.
