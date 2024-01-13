@@ -2,6 +2,9 @@
 
 This project involves creating a desk clock using an Arduino Uno, a DS3231 Real-Time Clock (RTC) module, and a SSD1306 OLED display. 
 
+More information located here: [Adafruit DS321 RTC](https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/arduino-usage)
+
+SDA pin goes to A4 and SCL goes to A5 to Arduion Uno pins
 ## Hardware
 
 1. Arduino Uno
