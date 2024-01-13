@@ -14,41 +14,36 @@ RTC_DS3231 rtc;
 
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-void setup()
-{
+void setup() {
     Serial.begin(57600);
 
 #ifndef ESP8266
-    while (!Serial)
-        ; // wait for serial port to connect. Needed for native USB
+    while (!Serial); // wait for serial port to connect. Needed for native USB
 #endif
 
-    if (!rtc.begin())
-    {
+    if (!rtc.begin()) {
         Serial.println("Couldn't find RTC");
         Serial.flush();
-        while (1)
-            delay(10);
+        while (1) delay(10);
     }
 
-    if (rtc.lostPower())
-    {
+    if (rtc.lostPower()) {
         Serial.println("RTC lost power, let's set the time!");
         rtc.adjust(DateTime(2023, 6, 2, 12, 9, 0));
     }
 
-    // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
-    { // Address 0x3C for 128x64
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3C for 128x64
         Serial.println(F("SSD1306 allocation failed"));
-        for (;;)
-            ; // Don't proceed, loop forever
+        for (;;) ; // Don't proceed, loop forever
     }
+
+    display.setRotation(2); // Rotate the display 180 degrees
     display.clearDisplay();
 }
 
-void loop()
-{
+void loop() {
+
+
     DateTime now = rtc.now();
 
     // Print to the Serial Monitor
@@ -74,24 +69,15 @@ void loop()
 
     // Print to the SSD1306 display
     display.clearDisplay();
-    display.setTextSize(1); // Set text size to 1
+    display.setTextSize(2); // Set text size to 1
     display.setTextColor(WHITE);
 
-    // Draw progress bar
-    int progress = (int)((now.second() / 59.0) * SCREEN_WIDTH);
-    display.drawRect(0, 0, SCREEN_WIDTH, 8, WHITE); // Draw border at the top of the screen
-    display.fillRect(2, 2, progress, 4, WHITE);     // Draw progress
-
+  
     display.setCursor(0, 16); // Move cursor down for the text
 
-    display.println(now.year(), DEC);
-    display.print('/');
-    display.print(now.month(), DEC);
-    display.print('/');
-    display.print(now.day(), DEC);
-    display.print(" (");
+    
     display.print(daysOfTheWeek[now.dayOfTheWeek()]);
-    display.println(") ");
+    display.println(" ");
 
     display.setTextSize(2); // Set text size to 2 for the time
     if (now.hour() < 10)
@@ -106,8 +92,7 @@ void loop()
         display.print('0');
     display.println(now.second(), DEC);
 
-    display.setTextSize(1); // Set the text size back to 1 for the temperature display
-    display.print("Temp: ");
+    display.setTextSize(2); // Set the text size back to 1 for the temperature display
     display.print(rtc.getTemperature());
     display.println(" C");
 
